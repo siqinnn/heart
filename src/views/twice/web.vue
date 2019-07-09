@@ -12,7 +12,6 @@
 // const file = { template: '<div>foo</div>' }
 // const tv = { template: '<div>bar</div>' }
 export default {
-   
   data() {
     return {};
   },

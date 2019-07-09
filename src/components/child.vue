@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home shijiu1">
     <button @click="sendparent">子组件给父组件传数据</button>
     <button @click="haha">查看父传子的数据</button>
   </div>
@@ -7,9 +7,7 @@
 <script>
 export default {
   props: ["duixiang"],
-  // props: {
-  //   duixiang:Object
-  // },
+  
   data() {
     return {
       duixiang2: {
@@ -32,3 +30,6 @@ export default {
   }
 };
 </script>
+<style>
+
+</style>

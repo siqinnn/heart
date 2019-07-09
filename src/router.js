@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router';
-import RoutePage from './views/route'
+import RoutePage from './views/html'
 
 Vue.use(Router)
 
@@ -9,14 +9,14 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [{
       path: '',
-      name: 'route',
+      name: 'html ',
       component: RoutePage,
       children: []
     },
     {
-      path: '/css',
-      name: 'css',
-      component: () => import('./views/css.vue'),
+      path: '/vue',
+      name: 'vue',
+      component: () => import('./views/vue.vue'),
       //二级路由
       children: [{
           path: '/web',
@@ -54,19 +54,19 @@ export default new Router({
       ]
     },
     {
+      path: '/css',
+      name: 'css',
+      component: () => import('./views/css.vue')
+    },
+    {
       path: '/js',
       name: 'js',
       component: () => import('./views/js.vue')
     },
     {
-      path: '/route',
-      name: 'route',
-      component: () => import('./views/route.vue')
-    },
-    {
-      path: '/vuex',
-      name: 'vuex',
-      component: () => import('./views/vuex.vue')
+      path: '/html',
+      name: 'html',
+      component: () => import('./views/html.vue')
     },
   ]
 })

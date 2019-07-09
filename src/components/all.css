@@ -1,0 +1,375 @@
+/* p {
+    margin: 5px 0;
+  }
+  button {
+    margin-right: 10px;
+    padding: 2px 15px;
+    font-size: 16px;
+  }
+  .new {
+   
+    display: flex;
+    justify-content: flex-start;
+  }
+  .new > div {
+    border: 2px groove tan;
+    width: 33.3%;
+   
+  }
+  .heiha {
+    color: red;
+  } */
+
+
+
+  
+#app {
+    overflow: hidden;
+    /* background: url("../assets/22.jpg") no-repeat center top ; */
+  background:  url("../assets/22.jpg") no-repeat fixed center;
+
+  background-size: contain;
+    /* filter:alpha(opacity=50); 
+     opacity: 0.5; */
+     /* background-color: rgba(255, 255, 255, .6) ; */
+     /* background: darkblue;
+     color:white */
+  }
+
+  .vueblog-font {
+    font-family: vueblog;
+  }
+  
+  table {
+    /* margin: 0 auto; */
+    width: 100%;
+    border: 1px solid red;
+    border-collapse: collapse;
+  }
+  th,
+  td {
+    text-align: center;
+    border: 1px solid green;
+  }
+  .ming {
+    width: 200px;
+    height: 30px;
+    border: 1px solid green;
+  }
+  .ming:hover {
+    cursor: pointer;
+  }
+  .jing {
+    width: 46px;
+    height: 44px;
+    background: url("../assets/图片1.png") no-repeat;
+    display: block;
+    margin-left: 2px;
+  }
+  .k1 {
+    background-position: 0px 0px;
+  }
+  .k2 {
+    background-position: 0px -45px;
+  }
+  .k3 {
+    width: 42px;
+    background-position: -47px 0px;
+  }
+  .k4 {
+    width: 42px;
+    background-position: -47px -45px;
+  }
+  .k5 {
+    width: 42px;
+    background-position: -91px 0px;
+  }
+  .k6 {
+    width: 42px;
+    background-position: -91px -45px;
+  }
+  .zi {
+    width: 65px;
+    height: 65px;
+    background: green;
+    border: 1px solid black;
+    text-align: center;
+    line-height: 30px;
+    font-size: 5px;
+    float: left;
+    margin-left: 4px;
+  }
+  .zi1:hover {
+    transform: translate(10px);
+  }
+  .zi2:hover {
+    transform: scale(0.5);
+  }
+  .zi3:hover {
+    transform: rotate(30deg);
+  }
+  .zi4:hover {
+    transform: skew(13deg);
+  }
+  .zi5:hover {
+    transform: translate3d(5px, 5px, 6px);
+  }
+  .zi6:hover {
+    transform: scale3d(2, 2, 2);
+  }
+  .zi7:hover {
+    transform: rotate3d(10, 10, 10, 30deg);
+  }
+  
+  .yin1 {
+    box-shadow: 10px 10px 5px #888888;
+  }
+  .yin2 {
+    border-radius: 20px;
+  }
+  .xian {
+    width: 65px;
+    height: 65px;
+    border: 3px groove rgba(200, 60, 30, 0.8);
+    text-align: center;
+    line-height: 30px;
+    font-size: 5px;
+    float: left;
+    margin-left: 3px;
+  }
+  .h1 {
+    background-image: linear-gradient(red, blue);
+  }
+  .h2 {
+    background-image: repeating-linear-gradient(
+      30deg,
+      orange 3px,
+      red 22px
+    ); /*重复渐变*/
+  }
+  .h3 {
+    background-image: linear-gradient(
+      60deg,
+      red 30px,
+      blue 80px,
+      green 120px,
+      orange 300px
+    ); /*百分比与像素都可以*/
+  }
+  .h4 {
+    background-image: radial-gradient(
+      ellipse,
+      red 3px,
+      blue 8px,
+      green 12px,
+      orange 30px
+    ); /*椭圆*/
+  }
+  .h5 {
+    background-image: radial-gradient(red, blue);
+  }
+  .h6 {
+    background-image: radial-gradient(circle at top, red, blue, orange);
+  }
+  .h7 {
+    background-image: repeating-radial-gradient(
+      circle,
+      orange 7px,
+      red 30px
+    ); /*重复渐变*/
+  }
+  .h8 {
+    background-image: radial-gradient(
+      circle closest-side,
+      red,
+      blue,
+      orange
+    ); /*重复渐变*/
+  }
+  .bian {
+    width: 100px;
+    height: 80px;
+    background: darkgray;
+    text-align: center;
+    line-height: 70px;
+    border: 3px groove goldenrod;
+    border-radius: 20px;
+    font-size: 5px;
+    float: left;
+    margin-left: 20px;
+    margin-bottom: 20px;
+  }
+  .guo {
+    animation: guo 3s ease 0s infinite;
+  }
+  .wei {
+    animation: wei 3s ease-in infinite;
+  }
+  @keyframes guo {
+    0% {
+    }
+    20% {
+      background: honeydew;
+    }
+    50% {
+      background: sandybrown;
+    }
+    70% {
+      background: goldenrod;
+    }
+    75% {
+      background: olive;
+    }
+    100% {
+      background: cadetblue;
+    }
+  }
+  @keyframes wei {
+    0% {
+      transform: translateX(20px) rotate(30deg);
+    }
+    20% {
+      transform: translateY(-30px) scale(0.8);
+    }
+    50% {
+      background: saddlebrown;
+      transform: translate(10px);
+    }
+    75% {
+      transform: rotate(-30deg);
+    }
+    100% {
+      transform: translate3d(10px, 10px, 10px);
+    }
+  }
+  .hav {
+    font-size: 10px;
+  }
+  .hav1:hover .hav {
+    font-size: 15px;
+  }
+  .yin {
+    display: none;
+  }
+  .hav2:hover .yin {
+    display: block;
+  }
+  #yang {
+    width: 80%;
+    height: 80px;
+    background: bisque;
+    border: 4px groove sandybrown;
+    border-radius: 20px;
+    margin-left: 40px;
+    margin-top: 20px;
+    text-align: center;
+    line-height: 80px;
+  }
+  .duo > button {
+    width: 100%;
+    
+    text-align: start;
+  }
+
+  
+  
+  
+  
+  p {
+      margin: 5px 0;
+    }
+    button {
+      margin-right: 10px;
+      padding: 2px 15px;
+      font-size: 16px;
+    }
+    .new {
+     
+      display: flex;
+      justify-content: flex-start;
+    }
+    .new > div {
+      border: 1px groove gray;
+      width: 33.3%;
+    }
+    .heiha {
+      color: red;
+    }
+ .shijiu >button{
+     width: 120px;
+   
+ }
+
+ .shijiu1 >button{
+  width:200px;
+
+}
+ .home{
+     background: rgba(181, 181, 181, 0.2)
+     
+ }
+
+
+
+ /* 弹性盒子，绝对居中布局 */
+ .tanxing{
+   width: 100%;
+   height:100%;
+   background: gray;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   margin: 0 auto;
+ }
+ .sa{
+   width: 33.3%;
+   height:100%;
+ }
+
+
+
+
+
+
+
+ .active{
+  width: 100px;
+  height:100px;
+  background: floralwhite;
+  
+}
+.white{
+  width: 100px;
+  height:100px;
+  background: white;
+ 
+}
+.white1{
+  background: salmon
+}
+.dong1{
+ width: 45%;
+ float:left
+}
+
+
+
+.bianse{
+  background: #888888
+}
+/* .kokoko{
+  background: saddlebrown
+} */
+
+
+
+
+.yellow {
+  background: yellow;
+ 
+}
+.kokoko {
+  background: lavender;
+  width: 100px;
+  height: 100px;
+}

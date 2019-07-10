@@ -1,15 +1,22 @@
 <template>
   <div class="home">
-   我是tv
+   tv
   </div>
 </template>
 <script>
+
 export default {
   data() {
     return {};
   },
-  created() {},
-  mounted() {},
-  methods: {}
+  methods: {
+    
+  },
+  mounted() {
+   
+  }
 };
 </script>
+
+
+

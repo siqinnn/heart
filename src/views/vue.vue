@@ -28,8 +28,8 @@
         <br />
         <div class="shijiu">
           <button v-for="name of nameList" :key="name" @click="Route(name)">{{name}}</button>
+          <router-view />
         </div>
-        <router-view />
       </div>
       <div class="shijiu">
         <p class="heiha">3.怎么添加事件，添加样式，怎样绑定多个class，比如：一个固定的class，一个动态切换的class</p>事件绑定：
@@ -195,15 +195,63 @@
         比如谷歌图片的加载，在图片未完成加载前，用随机的背景色占位，图片加载完成后才直接渲染出来。
         用自定义指令可以非常方便的实现这个功能。
         <br />
-        <el-input v-model="input" placeholder v-focus></el-input>
+        <input v-focus="{self:'self'}" type="text" placeholder="autoFocus" />
+      </div>
+      <div class="shijiu">
+        <p class="heiha">9.vuex一般怎么写，怎么用，模块化的使用；</p>vuex是什么：
+        <br />vuex是一个管理者，管理的方式是集中式管理，管理的对象即是vue.js应用程序中的众多组件的共享部分
+        <br />用法：
+        <br />(1)安装vuex npm install vuex --save
+        <br />(2)在main.js中引入vuex import vuex from 'vuex'
+        <br />
+        (3)使用vuex Vue.use(vuex); var store = new vuex.Store({创建vuex中的store对象state})
+        <br />(4)随后在实例化Vue对象时，加入store对象：
+        <div>
+          <router-link to="/vue/child1" class="setRouterLink">child1</router-link>
+          <router-link to="/vue/child2" class="setRouterLink">child2</router-link>
+          <router-view></router-view>
+        </div>
+      </div>
+    </div>
+    <div class="new">
+      <div class="shijiu">
+        <p class="heiha">10.引入第三方插件怎么写，比如用e-charts；</p>引入e-charts：
+        <br />(1)初始化vue项目 vue init webpack echart,进入初始化的项目下。安装echarts，
+        <br />(2)安装 npm install echarts -S
+        <br />(3)或者 cnpm install echarts -S
+        <br />(4)安装完成之后，引入需要的echarts，
+        <br />(5)全局引用： 首先在main.js中引入echarts，将其绑定到vue原型上：
+        <br />(6)import echarts from 'echarts'
+        <br />(7)Vue.prototype.$echarts = echarts;
+        <button @click="jjjjj">查看图表</button>
+        <div style="width:500px;height:500px" ref="chart"></div>
+      </div>
+      <div class="shijiu">
+        <p class="heiha">11.怎么用$set修改数据</p>
+        <div>
+          <p>数组变更检测</p>
+          {{arr}}
+          <button @click="testArr()">testArr</button>
+        </div>
+        <div>
+          <p>对象变更检测</p>
+          {{obj}}
+          <button @click="testObj()">testObj</button>
+        </div>
+      </div>
+      <div class="shijiu">
+        <p class="heiha">12.写个鼠标移动事件，监听鼠标坐标，要去抖动，500ms；</p>
+        <div class="drag" v-drag></div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+const echarts = require("echarts");
+//////////10.
 import child from "@/components/child";
-import directive from '@/directive'
+
 //import child1 from "@/components/smzq";
 export default {
   data: {},
@@ -224,8 +272,37 @@ export default {
       sites: [{ name: "bob" }, { name: "jerry" }, { name: "koko" }],
       lolo: "",
       isddd: true,
-      c: { color: "red" }
+      c: { color: "red" },
+      arr: ["a", "b", "c"],
+      obj: {
+        age: 40
+      }
     };
+  },
+  mounted() {
+    this.initCharts();
+  },
+  directives: {
+    drag(el, binding) {
+      el.onmousedown = function(e) {
+        //onmousedown事件会在鼠标按键被按下时发生。
+        var disx = e.pageX - el.offsetLeft;
+        //pageX() 属性是鼠标指针的位置，相对于文档的左边缘。
+        var disy = e.pageY - el.offsetTop;
+        console.log(e.pageX);
+        document.onmousemove = function(e) {
+          el.style.left = e.pageX - disx + "px";
+          el.style.top = e.pageY - disy + "px";
+          console.log(el.style.left);
+          console.log(el.style.top);
+        };
+        document.onmouseup = function() {
+          //鼠标松开
+          document.onmousemove = document.onmouseup = null;
+        };
+      };
+    },
+    
   },
 
   methods: {
@@ -281,13 +358,84 @@ export default {
       this.$axios.get("/seller", { id: 123 }).then(res => {
         console.log(res.data);
       });
+    },
+    jjjjj() {
+      this.$router.push({ name: "tv" });
+    },
+    initCharts() {
+      let myChart = echarts.init(this.$refs.chart);
+      // 绘制图表
+      myChart.setOption({
+        title: { text: "在Vue中使用echarts" },
+        tooltip: {},
+        xAxis: {
+          data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
+        },
+        yAxis: {},
+        series: [
+          {
+            name: "访问来源",
+            type: "pie",
+            radius: "55%",
+            center: ["50%", "60%"],
+            data: [
+              { value: 335, name: "直接访问" },
+              { value: 310, name: "邮件营销" },
+              { value: 234, name: "联盟广告" },
+              { value: 135, name: "视频广告" },
+              { value: 1548, name: "搜索引擎" }
+            ]
+          }
+        ]
+      });
+    },
+    testArr() {
+      //   this.arr[1] = "9"; // 不会触发变更检测
+      //   Vue.set(this.arr, 1, "9");  // 可以触发变更检测，但需要在上边写import
+      this.$set(this.arr, 2, "我是value值"); // 可以触发变更检测，不用写任何引入，用来修改数组，相应索引处的值（array,index,value）
+      this.arr.push("push");
+    },
+    testObj() {
+      // this.obj['job']='asdfdas';  // 不会触发变更检测
+      this.$set(this.obj, "job", "9");
     }
+    // getMousePos(event) {
+    //   var e = event || window.event;
+    //   var scrollX =
+    //     document.documentElement.scrollLeft || document.body.scrollLeft;
+    //   var scrollY =
+    //     document.documentElement.scrollTop || document.body.scrollTop;
+    //   var x = e.pageX || e.clientX + scrollX;
+    //   var y = e.pageY || e.clientY + scrollY;
+    //   //	    return { 'x': x, 'y': y };
+    //   console.log({ x: x, y: y });
+    // }
   }
 };
 </script>
 <style>
 .gai {
   margin: 10px;
+}
+.setRouterLink {
+  width: 150px;
+  height: 30px;
+  background: gray;
+  border-radius: 5px;
+  text-decoration: none;
+  color: white;
+  border: 2px groove gainsboro;
+  margin: 5px;
+}
+.drag {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  top: 2160px;
+  right: 400px;
+  background-color: red;
+  background: saddlebrown;
+  background-size: cover;
 }
 </style>
 

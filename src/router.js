@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router';
 import RoutePage from './views/html'
+import child1 from '@/components/allchild/child1';
+import child2 from '@/components/allchild/child2';
 
 Vue.use(Router)
 
@@ -18,7 +20,17 @@ export default new Router({
       name: 'vue',
       component: () => import('./views/vue.vue'),
       //二级路由
-      children: [{
+      children: [
+        {
+          path: 'child1',
+          name: 'child1',
+          component: child1
+        },{
+          path: 'child2',
+          name: 'child2',
+          component:child2
+        },
+        {
           path: '/web',
           name: 'web',
           redirect: 'film'

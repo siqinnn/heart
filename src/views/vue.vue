@@ -425,7 +425,7 @@ export default {
     //   console.log({ x: x, y: y });
     // }
 
-    pic() { 
+    pic() {  
       let arr1 = [
         "http://attachments.gfan.net.cn/forum/201806/02/150827jqzbh5rjxh2q5tvj.jpg",
         "http://t.qianlong.com/data/attachment/forum/201410/03/165837iflyv2obob00b2b0.jpg",

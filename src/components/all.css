@@ -292,6 +292,12 @@
       border: 1px groove gray;
       width: 33.3%;
     }
+    #new1{
+      width:100%;
+      border: 1px  groove gray;
+      display: flex;
+      justify-content: flex-start;
+    }
     .heiha {
       color: red;
     }

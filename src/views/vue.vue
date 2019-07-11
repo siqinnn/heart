@@ -187,6 +187,7 @@
         <br />(1)下载安装 npm install axios --save
         <br />(2)在需要使用的文件内 import axios from 'axios'
         <br />
+        {{axiosData}}
         <button @click="axios1">axios</button>
       </div>
       <div class="shijiu">
@@ -244,6 +245,12 @@
         <div class="drag" v-drag></div>
       </div>
     </div>
+    <div id="new1">
+      <div>
+        <button @click="pic">pic</button>
+      </div>
+      <div id="wap"></div>
+    </div>
   </div>
 </template>
 
@@ -253,6 +260,8 @@ const echarts = require("echarts");
 import child from "@/components/child";
 
 //import child1 from "@/components/smzq";
+import debounce from "@/components/fangdou";
+import axios from "axios";
 export default {
   data: {},
   components: {
@@ -276,12 +285,15 @@ export default {
       arr: ["a", "b", "c"],
       obj: {
         age: 40
-      }
+      },
+      axiosData: "",
+      count: 0
     };
   },
   mounted() {
     this.initCharts();
   },
+
   directives: {
     drag(el, binding) {
       el.onmousedown = function(e) {
@@ -301,8 +313,7 @@ export default {
           document.onmousemove = document.onmouseup = null;
         };
       };
-    },
-    
+    }
   },
 
   methods: {
@@ -355,9 +366,11 @@ export default {
     liu3() {},
     liu5() {},
     axios1() {
-      this.$axios.get("/seller", { id: 123 }).then(res => {
-        console.log(res.data);
-      });
+      axios
+        .get("https://api.coindesk.com/v1/bpi/currentprice.json")
+        .then(res => (this.axiosData = res.data.bpi))
+        .catch(error => console.log(error))
+        .finally(() => console.log("finally"));
     },
     jjjjj() {
       this.$router.push({ name: "tv" });
@@ -398,7 +411,8 @@ export default {
     testObj() {
       // this.obj['job']='asdfdas';  // 不会触发变更检测
       this.$set(this.obj, "job", "9");
-    }
+    },
+
     // getMousePos(event) {
     //   var e = event || window.event;
     //   var scrollX =
@@ -410,6 +424,101 @@ export default {
     //   //	    return { 'x': x, 'y': y };
     //   console.log({ x: x, y: y });
     // }
+
+    pic() {
+      let arr1 = [
+        "http://attachments.gfan.net.cn/forum/201806/02/150827jqzbh5rjxh2q5tvj.jpg",
+        "http://t.qianlong.com/data/attachment/forum/201410/03/165837iflyv2obob00b2b0.jpg",
+        "http://attachments.gfan.net.cn/forum/201806/02/150827jqzbh5rjxh2q5tvj.jpg",
+        "http://t.qianlong.com/data/attachment/forum/201410/03/165837iflyv2obob00b2b0.jpg",
+        "http://attachments.gfan.net.cn/forum/201806/02/150827jqzbh5rjxh2q5tvj.jpg",
+        "http://t.qianlong.com/data/attachment/forum/201410/03/165837iflyv2obob00b2b0.jpg",
+        "http://attachments.gfan.net.cn/forum/201806/02/150827jqzbh5rjxh2q5tvj.jpg",
+        "http://t.qianlong.com/data/attachment/forum/201410/03/165837iflyv2obob00b2b0.jpg",
+        "http://attachments.gfan.net.cn/forum/201806/02/150827jqzbh5rjxh2q5tvj.jpg",
+        "http://t.qianlong.com/data/attachment/forum/201410/03/165837iflyv2obob00b2b0.jpg",
+        "http://attachments.gfan.net.cn/forum/201806/02/150827jqzbh5rjxh2q5tvj.jpg",
+        "http://t.qianlong.com/data/attachment/forum/201410/03/165837iflyv2obob00b2b0.jpg",
+        "http://attachments.gfan.net.cn/forum/201806/02/150827jqzbh5rjxh2q5tvj.jpg",
+        "http://t.qianlong.com/data/attachment/forum/201410/03/165837iflyv2obob00b2b0.jpg",
+        "http://attachments.gfan.net.cn/forum/201806/02/150827jqzbh5rjxh2q5tvj.jpg",
+        "http://t.qianlong.com/data/attachment/forum/201410/03/165837iflyv2obob00b2b0.jpg",
+        "http://attachments.gfan.net.cn/forum/201806/02/150827jqzbh5rjxh2q5tvj.jpg",
+        "http://t.qianlong.com/data/attachment/forum/201410/03/165837iflyv2obob00b2b0.jpg",
+        "http://attachments.gfan.net.cn/forum/201806/02/150827jqzbh5rjxh2q5tvj.jpg",
+        "http://t.qianlong.com/data/attachment/forum/201410/03/165837iflyv2obob00b2b0.jpg"
+      ];
+
+      let num = 5; // 每次加载的图片数量
+      // 使用 Promis.all() 并发，每次同时加载固定数量
+      let wap = document.getElementById("wap");
+      let arr2 = [];
+
+      let inter = 0;
+      let promis_all = () => {
+        let now = arr1.slice(inter, inter + num);
+        for (let i = num; i--; ) {
+          arr2[i] = new Promise(resolve => {
+            if (i == 2) {
+              // throw (false)     // 只有自定义的错误提示
+              throw new Error("报错了"); // 有完整错误数据的 Erro对象
+            }
+            let img = new Image();
+            img.style.width = "90px";
+            img.style.marginRight = "5px";
+            img.src = now[i];
+            img.onload = () => {
+              resolve(img);
+            };
+          }).catch(err => {
+            // 一定要添加错误处理，否则后边Promise.all() 无法正常遍历所有数据
+            // 同时也对错误进行处理（使用本地图片补位）
+
+            // 一般推荐在 Promise 链的最后添加一个 catch 函数，
+            // 因为对于一个没有错误处理函数的 Promise 链，任何错误都会在链中被传播下去，直到你注册了错误处理函数。
+            console.log(err);
+            let img = new Image();
+            img.style.width = "50px";
+            img.style.marginRight = "5px";
+            img.src = require("@/assets/22.jpg");
+            img.onload = () => {
+              arr2[i] = img;
+            };
+            return img;
+          });
+        }
+
+        Promise.all(arr2)
+          .then(item => {
+            console.log(item);
+            // item是一个由 img 对象组成的数组
+            let isDiv = document.createElement("div");
+
+            item.forEach(val => {
+              // 遍历 item 数组，将 img 对象插入 DOM 树
+              isDiv.appendChild(val);
+              // throw '00000'
+            });
+            wap.appendChild(isDiv);
+            return;
+          })
+          .then(_ => {
+            // 使用 then 保证上边的执行完才执行下边的
+            inter += num;
+            let isTrue = inter < arr1.length;
+            console.log(arr1.length);
+            console.log(inter);
+            if (isTrue) {
+              setTimeout(promis_all, 1000);
+            }
+          })
+          .catch(reason => {
+            // 这个catch是用来处理 Promise.all(arr2) 产生的错误
+            console.log(reason);
+          });
+      };
+      promis_all();
+    }
   }
 };
 </script>

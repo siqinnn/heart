@@ -245,11 +245,33 @@
         <div class="drag" v-drag></div>
       </div>
     </div>
-    <div id="new1">
-      <div>
-        <button @click="pic">pic</button>
+    <div class="new">
+      <div class="shijiu">
+        <p class="heiha">13.利用promise.all异步加载图片，同时加载五个</p>
+        <button @click="pic">promise.all</button>
+        <div id="wap"></div>
       </div>
-      <div id="wap"></div>
+
+      <div class="shijiu">
+        <p class="heiha">14.下拉级联</p>
+
+        <el-cascader :options="options" :show-all-levels="false"></el-cascader>
+      </div>
+      <div class="shijiu">
+        <p class="heiha">15.echarts饼图</p>
+
+        <div id="pie_echarts" style="width:500px;height:500px" ref="chartbing"></div>
+      </div>
+    </div>
+    <div class="new">
+      <div class="shijiu">
+        <p class="heiha">16.echarts柱形图</p>
+        <div style="width:500px;height:500px" ref="chartzhu"></div>
+      </div>
+      <div class="shijiu">
+        <p class="heiha">17.echarts线形图</p>
+        <div style="width:500px;height:500px" ref="chartxian"></div>
+      </div>
     </div>
   </div>
 </template>
@@ -271,6 +293,68 @@ export default {
 
   data() {
     return {
+      options: [
+        {
+          value: "zhinan",
+          label: "城市",
+          children: [
+            {
+              value: "北京",
+              label: "北京",
+              children: [
+                {
+                  value: "朝阳",
+                  label: "朝阳"
+                },
+                {
+                  value: "大兴",
+                  label: "大兴"
+                },
+                {
+                  value: "昌平",
+                  label: "昌平"
+                },
+                {
+                  value: "顺义",
+                  label: "顺义"
+                }
+              ]
+            },
+            {
+              value: "内蒙古",
+              label: "内蒙古",
+              children: [
+                {
+                  value: "呼伦贝尔",
+                  label: "呼伦贝尔"
+                },
+                {
+                  value: "锡林郭勒",
+                  label: "锡林郭勒"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          value: "吃的",
+          label: "吃的",
+          children: [
+            {
+              value: "巧克力",
+              label: "巧克力"
+            },
+            {
+              value: "蛋糕",
+              label: "蛋糕"
+            },
+            {
+              value: "牛肉",
+              label: "牛肉"
+            }
+          ]
+        }
+      ],
       nameList: ["film", "tv", "music"],
       isActive: true,
       istrue: true,
@@ -292,6 +376,9 @@ export default {
   },
   mounted() {
     this.initCharts();
+    this.echartsbing();
+    this.echartzhu();
+    this.echartsxian();
   },
 
   directives: {
@@ -402,6 +489,211 @@ export default {
         ]
       });
     },
+    echartsbing() {
+      // 基于准备好的dom，初始化echarts实例
+      let myChart1 = echarts.init(this.$refs.chartbing);
+      console.log(this.$refs.chartbing);
+      //var myChart = echarts.init(document.getElementById('pie_echarts'));
+      // 指定图表的配置项和数据
+      myChart1.setOption({
+        tooltip: {
+          trigger: "item",
+          formatter: "{a} <br/>{b}: {c} ({d}%)"
+        },
+        legend: {
+          orient: "vertical",
+          x: "left",
+          data: ["直接访问", "邮件营销", "联盟广告", "视频广告", "搜索引擎"]
+        },
+        series: [
+          {
+            name: "访问来源",
+            type: "pie",
+            radius: ["50%", "70%"],
+            avoidLabelOverlap: false,
+            label: {
+              normal: {
+                show: false,
+                position: "center"
+              },
+              emphasis: {
+                show: true,
+                textStyle: {
+                  fontSize: "30",
+                  fontWeight: "bold"
+                }
+              }
+            },
+            labelLine: {
+              normal: {
+                show: false
+              }
+            },
+            data: [
+              { value: 335, name: "直接访问" },
+              { value: 310, name: "邮件营销" },
+              { value: 234, name: "联盟广告" },
+              { value: 135, name: "视频广告" },
+              { value: 1548, name: "搜索引擎" }
+            ]
+          }
+        ]
+      });
+      // 使用刚指定的配置项和数据显示图表。
+    },
+    echartzhu() {
+      let myChart = echarts.init(this.$refs.chartzhu);
+
+      //var myChart = echarts.init(document.getElementById('pie_echarts'));
+      // 指定图表的配置项和数据
+
+      var xAxisData = [];
+      var data1 = [];
+      var data2 = [];
+      for (var i = 0; i < 100; i++) {
+        xAxisData.push("类目" + i);
+        data1.push((Math.sin(i / 5) * (i / 5 - 10) + i / 6) * 5);
+        data2.push((Math.cos(i / 5) * (i / 5 - 10) + i / 6) * 5);
+      }
+
+      myChart.setOption({
+        title: {
+          text: "柱状图动画延迟"
+        },
+        legend: {
+          data: ["bar", "bar2"],
+          align: "left"
+        },
+        toolbox: {
+          // y: 'bottom',
+          feature: {
+            magicType: {
+              type: ["stack", "tiled"]
+            },
+            dataView: {},
+            saveAsImage: {
+              pixelRatio: 2
+            }
+          }
+        },
+        tooltip: {},
+        xAxis: {
+          data: xAxisData,
+          silent: false,
+          splitLine: {
+            show: false
+          }
+        },
+        yAxis: {},
+        series: [
+          {
+            name: "bar",
+            type: "bar",
+            data: data1,
+            animationDelay: function(idx) {
+              return idx * 10;
+            }
+          },
+          {
+            name: "bar2",
+            type: "bar",
+            data: data2,
+            animationDelay: function(idx) {
+              return idx * 10 + 100;
+            }
+          }
+        ],
+        animationEasing: "elasticOut",
+        animationDelayUpdate: function(idx) {
+          return idx * 5;
+        }
+      });
+    },
+    echartsxian() {
+      let myChart = echarts.init(this.$refs.chartxian);
+      myChart.setOption({
+        title: {
+          text: "未来一周气温变化",
+          subtext: "纯属虚构"
+        },
+        tooltip: {
+          trigger: "axis"
+        },
+        legend: {
+          data: ["最高气温", "最低气温"]
+        },
+        toolbox: {
+          show: true,
+          feature: {
+            dataZoom: {
+              yAxisIndex: "none"
+            },
+            dataView: { readOnly: false },
+            magicType: { type: ["line", "bar"] },
+            restore: {},
+            saveAsImage: {}
+          }
+        },
+        xAxis: {
+          type: "category",
+          boundaryGap: false,
+          data: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
+        },
+        yAxis: {
+          type: "value",
+          axisLabel: {
+            formatter: "{value} °C"
+          }
+        },
+        series: [
+          {
+            name: "最高气温",
+            type: "line",
+            data: [11, 11, 15, 13, 12, 13, 10],
+            markPoint: {
+              data: [
+                { type: "max", name: "最大值" },
+                { type: "min", name: "最小值" }
+              ]
+            },
+            markLine: {
+              data: [{ type: "average", name: "平均值" }]
+            }
+          },
+          {
+            name: "最低气温",
+            type: "line",
+            data: [1, -2, 2, 5, 3, 2, 0],
+            markPoint: {
+              data: [{ name: "周最低", value: -2, xAxis: 1, yAxis: -1.5 }]
+            },
+            markLine: {
+              data: [
+                { type: "average", name: "平均值" },
+                [
+                  {
+                    a: "none",
+                    x: "90%",
+                    yAxis: "max"
+                  },
+                  {
+                    a: "circle",
+                    label: {
+                      normal: {
+                        position: "start",
+                        formatter: "最大值"
+                      }
+                    },
+                    type: "max",
+                    name: "最高点"
+                  }
+                ]
+              ]
+            }
+          }
+        ]
+      });
+    },
     testArr() {
       //   this.arr[1] = "9"; // 不会触发变更检测
       //   Vue.set(this.arr, 1, "9");  // 可以触发变更检测，但需要在上边写import
@@ -425,28 +717,28 @@ export default {
     //   console.log({ x: x, y: y });
     // }
 
-    pic() {  
+    pic() {
       let arr1 = [
-        "http://attachments.gfan.net.cn/forum/201806/02/150827jqzbh5rjxh2q5tvj.jpg",
-        "http://t.qianlong.com/data/attachment/forum/201410/03/165837iflyv2obob00b2b0.jpg",
-        "http://attachments.gfan.net.cn/forum/201806/02/150827jqzbh5rjxh2q5tvj.jpg",
-        "http://t.qianlong.com/data/attachment/forum/201410/03/165837iflyv2obob00b2b0.jpg",
-        "http://attachments.gfan.net.cn/forum/201806/02/150827jqzbh5rjxh2q5tvj.jpg",
-        "http://t.qianlong.com/data/attachment/forum/201410/03/165837iflyv2obob00b2b0.jpg",
-        "http://attachments.gfan.net.cn/forum/201806/02/150827jqzbh5rjxh2q5tvj.jpg",
-        "http://t.qianlong.com/data/attachment/forum/201410/03/165837iflyv2obob00b2b0.jpg",
-        "http://attachments.gfan.net.cn/forum/201806/02/150827jqzbh5rjxh2q5tvj.jpg",
-        "http://t.qianlong.com/data/attachment/forum/201410/03/165837iflyv2obob00b2b0.jpg",
-        "http://attachments.gfan.net.cn/forum/201806/02/150827jqzbh5rjxh2q5tvj.jpg",
-        "http://t.qianlong.com/data/attachment/forum/201410/03/165837iflyv2obob00b2b0.jpg",
-        "http://attachments.gfan.net.cn/forum/201806/02/150827jqzbh5rjxh2q5tvj.jpg",
-        "http://t.qianlong.com/data/attachment/forum/201410/03/165837iflyv2obob00b2b0.jpg",
-        "http://attachments.gfan.net.cn/forum/201806/02/150827jqzbh5rjxh2q5tvj.jpg",
-        "http://t.qianlong.com/data/attachment/forum/201410/03/165837iflyv2obob00b2b0.jpg",
-        "http://attachments.gfan.net.cn/forum/201806/02/150827jqzbh5rjxh2q5tvj.jpg",
-        "http://t.qianlong.com/data/attachment/forum/201410/03/165837iflyv2obob00b2b0.jpg",
-        "http://attachments.gfan.net.cn/forum/201806/02/150827jqzbh5rjxh2q5tvj.jpg",
-        "http://t.qianlong.com/data/attachment/forum/201410/03/165837iflyv2obob00b2b0.jpg"
+        "http://cdn.gv-photo.com/uploads/2019/06/181832241415.jpg_385x590.jpg",
+        "http://cdn.gv-photo.com/uploads/2019/05/251544269870.jpg_385x590.jpg",
+        "http://cdn.gv-photo.com/uploads/2019/06/061813589992.jpg_385x590.jpg",
+        "http://cdn.gv-photo.com/uploads/2018/10/201529413653.jpg_385x590.jpg",
+        "http://cdn.gv-photo.com/uploads/2018/08/161546597525.jpg_385x590.jpg",
+        "http://cdn.gv-photo.com/uploads/2019/06/181832241415.jpg_385x590.jpg",
+        "http://cdn.gv-photo.com/uploads/2019/05/251544269870.jpg_385x590.jpg",
+        "http://cdn.gv-photo.com/uploads/2019/06/061813589992.jpg_385x590.jpg",
+        "http://cdn.gv-photo.com/uploads/2018/10/201529413653.jpg_385x590.jpg",
+        "http://cdn.gv-photo.com/uploads/2018/08/161546597525.jpg_385x590.jpg",
+        "http://cdn.gv-photo.com/uploads/2019/06/181832241415.jpg_385x590.jpg",
+        "http://cdn.gv-photo.com/uploads/2019/05/251544269870.jpg_385x590.jpg",
+        "http://cdn.gv-photo.com/uploads/2019/06/061813589992.jpg_385x590.jpg",
+        "http://cdn.gv-photo.com/uploads/2018/10/201529413653.jpg_385x590.jpg",
+        "http://cdn.gv-photo.com/uploads/2018/08/161546597525.jpg_385x590.jpg",
+        "http://cdn.gv-photo.com/uploads/2019/06/181832241415.jpg_385x590.jpg",
+        "http://cdn.gv-photo.com/uploads/2019/05/251544269870.jpg_385x590.jpg",
+        "http://cdn.gv-photo.com/uploads/2019/06/061813589992.jpg_385x590.jpg",
+        "http://cdn.gv-photo.com/uploads/2018/10/201529413653.jpg_385x590.jpg",
+        "http://cdn.gv-photo.com/uploads/2018/08/161546597525.jpg_385x590.jpg"
       ];
 
       let num = 5; // 每次加载的图片数量
@@ -459,10 +751,10 @@ export default {
         let now = arr1.slice(inter, inter + num);
         for (let i = num; i--; ) {
           arr2[i] = new Promise(resolve => {
-            if (i == 2) {
-              // throw (false)     // 只有自定义的错误提示
-              throw new Error("报错了"); // 有完整错误数据的 Erro对象
-            }
+            // if (i == 2) {
+            //   // throw (false)     // 只有自定义的错误提示
+            //   throw new Error("报错了"); // 有完整错误数据的 Erro对象    ,手动错误处理  /如果错了，就天机本地图片
+            // }
             let img = new Image();
             img.style.width = "90px";
             img.style.marginRight = "5px";

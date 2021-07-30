@@ -3,8 +3,9 @@
     我是child2
     <div>
       <h3>vuex</h3>
-      <button @click="changeStore">点击</button>
-      {{counts}}<br> {{use_getters_count}}
+      <!-- <button @click="changeStore">点击</button> -->
+      {{counts}}
+      <!-- <br> {{use_getters_count}} -->
     </div>
   
    

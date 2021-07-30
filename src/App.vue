@@ -8,9 +8,7 @@
         :key="name"
         @click="Route(name,index)"
         :class="{bianse:isbianse==index}"
-      
       >{{name}}</button>
-
       <router-view></router-view>
     </div>
 
@@ -39,7 +37,7 @@ export default {
   
   data() {
     return {
-      nameList: ["html", "css", "js", "vue"],
+      nameList: ["html", "css", "js", "vue","practice","echarsgr"],
      // pathList: ["/css", "/js", "/route", "/vuex"],
      
       isbianse: true
@@ -60,7 +58,6 @@ export default {
   }
 };
 </script>
-
 <style src="./components/all.css">
 </style>
 

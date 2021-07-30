@@ -80,5 +80,15 @@ export default new Router({
       name: 'html',
       component: () => import('./views/html.vue')
     },
+    {
+      path: '/practice',
+      name: 'practice',
+      component: () => import('./components/practice.vue')
+    },
+    {
+      path: '/echarsgr',
+      name: 'echarsgr',
+      component: () => import('./components/echarsgr.vue')
+    },
   ]
 })

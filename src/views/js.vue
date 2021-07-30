@@ -564,6 +564,12 @@
           <div class="sa a3" style="background: lightgray;"></div>
         </div>
       </div>
+      <div class="shijiu">
+        <p class="heiha">40.es6数组,对象的解狗赋值</p>
+        <button @click="newbtn">按钮</button>
+        <div>let [a, b, c] = [1, 2, 3];</div>
+        <div>let [foo, [[bar], baz]] = [1, [[2], 3]];</div>
+      </div>
     </div>
   </div>
 </template>
@@ -602,6 +608,23 @@ export default {
   computed: {},
   mounted() {},
   methods: {
+    newbtn() {
+      let [a, b, c] = [1, 2, 3];
+      console.log(a, b, c);
+      let [foo, [[bar], baz]] = [1, [[2], 3]];
+      console.log(foo, bar, baz);
+      let sub = {
+        lab: 1,
+        foo: 2,
+        baz: 3
+      };
+      console.log(sub);
+      const arr1 = ["a", "b"];
+      const arr2 = ["c","d"];
+      const arr3 = ["e", "f"];
+      let arr=[...arr1,...arr2,...arr3]
+      console.log(arr)
+    },
     login() {
       //验证姓名和密码是否与locastorage一致
       if (
@@ -693,7 +716,7 @@ export default {
     sanmu() {
       let a = 3,
         b = 4;
-      let c = 3 > 4 ? a : b;
+      let c = 3 < 4 ? a : b;
       console.log(c);
     },
     shengming() {

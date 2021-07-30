@@ -4,7 +4,8 @@
     <div>
       <h3>vuex</h3>
       <button @click="changeStore">点击(触发dispatch)</button>
-      {{counts}}<br> {{getTodo}}<br>{{withoutModule}}
+      {{counts}}
+      <!-- <br> {{getTodo}}<br>{{withoutModule}} -->
     </div>
   </div>
 </template>
@@ -35,13 +36,13 @@ export default {
   // 类似get、set 属性
   computed: {
     // 这里一般用来定义动态初始数据，函数名即为getter、setter属性
-    use_getters_count() {
-      return this.$store.getters.use_getters_count;
-    },
-    // 通过传参函数获取状态值，动态读取counts
-    getTodo() {
-      return this.$store.getters.getTodoById(this.counts % 2);
-    },
+    // use_getters_count() {
+    //   return this.$store.getters.use_getters_count;
+    // },
+    // // 通过传参函数获取状态值，动态读取counts
+    // getTodo() {
+    //   return this.$store.getters.getTodoById(this.counts % 2);
+    // },
     ...mapState({
       // 只能用来直接读取数据
       counts: state => state.storeModule1.counts // 读取的是模块storeModule1

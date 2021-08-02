@@ -362,26 +362,28 @@
           <el-button type="primary" @click="submitUpload()">确定</el-button>
         </span>
       </div>
-      <div class="shijiu">
-        <p class="heiha">22.我是父组件</p>
-        <!-- <button @click="paixu">数组排序</button> -->
-        <childtemp :msg="msg" childcolor="green" :dataList="dataList" @childclick1="fathertake"></childtemp>
-      </div>
-      <div class="shijiu">
-        <p class="heiha">23.vuex</p>
-        <div>{{counts}}</div>
-        <el-table :data="arraylist" style="width: 100%;">
-          <el-table-column prop="date" label="发展人"  width="180">
-          </el-table-column>
-          <el-table-column prop="name" label="发展量"  width="180">
-          </el-table-column>
-          <el-table-column prop="address" label="当月累计(万)">
-          </el-table-column>
-        </el-table>
 
-      </div>
+  </div>
+  <div class="new">
+    <div class="shijiu">
+      <p class="heiha">22.我是父组件</p>
+      <!-- <button @click="paixu">数组排序</button> -->
+      <childtemp :msg="msg" childcolor="green" :dataList="dataList" @childclick1="fathertake"></childtemp>
     </div>
+    <div class="shijiu">
+      <p class="heiha">23.vuex</p>
+      <div>{{counts}}</div>
+      <el-table :data="arraylist" style="width: 100%;">
+        <el-table-column prop="date" label="发展人" width="180">
+        </el-table-column>
+        <el-table-column prop="name" label="发展量" width="180">
+        </el-table-column>
+        <el-table-column prop="address" label="当月累计(万)">
+        </el-table-column>
+      </el-table>
 
+    </div>
+  </div>
   </div>
 </template>
 
@@ -510,22 +512,22 @@
         counts: state => state.counts
 
       }),
-    //   handleReduceClick(n){
-    //   this.$store.commit('mutationsReduceCount',n);
-    // }
+      //   handleReduceClick(n){
+      //   this.$store.commit('mutationsReduceCount',n);
+      // }
       // ...mapState({
       //   arraylist: state => state.arraylist
 
       // }),
-      
+
       // counts() {
       //   return this.$store.state.storeModule1.counts;
       // },
     },
     mounted() {
-      this.arraylist=this.$store.state.arraylist
+      this.arraylist = this.$store.state.arraylist
       console.log('-----0----')
-  
+
       this.initCharts();
       this.echartsbing();
       this.echartzhu();

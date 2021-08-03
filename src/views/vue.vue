@@ -363,28 +363,36 @@
         </span>
       </div>
 
-  </div>
-  <div class="new">
-    <div class="shijiu">
-      <p class="heiha">22.我是父组件</p>
-      <!-- <button @click="paixu">数组排序</button> -->
-      <childtemp :msg="msg" childcolor="green" :dataList="dataList" @childclick1="fathertake"></childtemp>
     </div>
-    <div class="shijiu">
-      <p class="heiha">23.vuex</p>
-      <div>{{counts}}</div>
-      <el-table :data="arraylist" style="width: 100%;">
-        <el-table-column prop="date" label="发展人" width="180">
-        </el-table-column>
-        <el-table-column prop="name" label="发展量" width="180">
-        </el-table-column>
-        <el-table-column prop="address" label="当月累计(万)">
-        </el-table-column>
-      </el-table>
+    <div class="new">
+      <div class="shijiu">
+        <p class="heiha">22.我是父组件</p>
+        <!-- <button @click="paixu">数组排序</button> -->
+        <childtemp :msg="msg" childcolor="green" :dataList="dataList" @childclick1="fathertake"></childtemp>
+      </div>
+      <div class="shijiu">
+        <p class="heiha">23.vuex</p>
+        <div>{{counts}}</div>
+        <el-table :data="arraylist" style="width: 100%;">
+          <el-table-column prop="date" label="发展人" width="180">
+          </el-table-column>
+          <el-table-column prop="name" label="发展量" width="180">
+          </el-table-column>
+          <el-table-column prop="address" label="当月累计(万)">
+          </el-table-column>
+        </el-table>
+        <div style="display:flex;flex-direction:row ;">
+          <div v-for="(item,index) in percentagelist" :key="index" >
+            <el-progress type="dashboard" :percentage="item.percentage" :color="colors" :format="format"></el-progress>
+          </div>
+  
+        </div>
+        
+      </div>
 
     </div>
   </div>
-  </div>
+
 </template>
 
 <script>
@@ -406,7 +414,27 @@
 
     data() {
       return {
+        percentagelist:[{
+        percentage: 100,
 
+        },{
+        percentage: 100,
+
+        },{
+        percentage: 100,
+
+        },{
+        percentage: 100,
+
+        },{
+        percentage: 100,
+
+        }],
+        colors: [
+          { color: '#f56c6c', percentage: 20 },
+         
+        ],
+        arraylist: [],
         dataList: [{
           developName: '张三',
           indexValue: "220",
@@ -526,7 +554,6 @@
     },
     mounted() {
       this.arraylist = this.$store.state.arraylist
-      console.log('-----0----')
 
       this.initCharts();
       this.echartsbing();
@@ -558,6 +585,13 @@
     },
 
     methods: {
+      format(percentage) {
+        if (percentage) {
+          return percentage == 100 ? '100' : '100'
+        }else{
+          return percentage == 20 ? '20' : '20'
+        }
+      },
       fathertake(value) {
         console.log('[[[[[[value]]]]]]')
         console.log(value)
@@ -1067,7 +1101,7 @@
   .bigone {
     width: 500px;
     height: 500px;
-    background: white;
+    /* background: white; */
     display: flex;
     /* flex-direction: row; */
     flex-direction: column;
@@ -1084,7 +1118,7 @@
     width: 400px;
 
     margin: 2px;
-    background: hotpink;
+    background: gray;
   }
 
   .footer {
@@ -1110,6 +1144,7 @@
     display: flex;
     justify-content: space-between;
     width: 70%;
+    
   }
 
   .footerTop ul {

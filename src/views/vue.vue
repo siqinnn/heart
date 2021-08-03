@@ -372,6 +372,10 @@
       </div>
       <div class="shijiu">
         <p class="heiha">23.vuex</p>
+
+        <div>
+          <button @click="mapclick">mapclick</button>
+        </div>
         <div>{{counts}}</div>
         <el-table :data="arraylist" style="width: 100%;">
           <el-table-column prop="date" label="发展人" width="180">
@@ -382,12 +386,12 @@
           </el-table-column>
         </el-table>
         <div style="display:flex;flex-direction:row ;">
-          <div v-for="(item,index) in percentagelist" :key="index" >
+          <div v-for="(item,index) in percentagelist" :key="index">
             <el-progress type="dashboard" :percentage="item.percentage" :color="colors" :format="format"></el-progress>
           </div>
-  
+
         </div>
-        
+
       </div>
 
     </div>
@@ -414,25 +418,51 @@
 
     data() {
       return {
-        percentagelist:[{
-        percentage: 100,
+        maplist: [
+          {
+            name: 'tom',
+            age: '11',
+            number: '13522222222',
+            size: '38',
+          },
+          {
+            name: 'tom',
+            age: '12',
+            number: '13522222222',
+            size: '38',
+          },
+          {
+            name: 'tom',
+            age: '13',
+            number: '13522222222',
+            size: '38',
+          },
+          {
+            name: 'tom',
+            age: '14',
+            number: '13522222222',
+            size: '38',
+          },
+        ],
+        percentagelist: [{
+          percentage: 100,
 
-        },{
-        percentage: 100,
+        }, {
+          percentage: 100,
 
-        },{
-        percentage: 100,
+        }, {
+          percentage: 100,
 
-        },{
-        percentage: 100,
+        }, {
+          percentage: 100,
 
-        },{
-        percentage: 100,
+        }, {
+          percentage: 100,
 
         }],
         colors: [
           { color: '#f56c6c', percentage: 20 },
-         
+
         ],
         arraylist: [],
         dataList: [{
@@ -585,10 +615,19 @@
     },
 
     methods: {
+      mapclick() {
+        this.listadd=this.maplist.map((item) => ({
+          namee:item.name,
+          agee:item.age
+        }))
+        console.log(this.listadd)
+        
+        console.log(this.listadd.slice(0,1))
+      },
       format(percentage) {
         if (percentage) {
           return percentage == 100 ? '100' : '100'
-        }else{
+        } else {
           return percentage == 20 ? '20' : '20'
         }
       },
@@ -1144,7 +1183,7 @@
     display: flex;
     justify-content: space-between;
     width: 70%;
-    
+
   }
 
   .footerTop ul {

@@ -197,7 +197,7 @@
         比如谷歌图片的加载，在图片未完成加载前，用随机的背景色占位，图片加载完成后才直接渲染出来。
         用自定义指令可以非常方便的实现这个功能。
         <br />
-        <input v-focus="{self:'self'}" type="text" placeholder="autoFocus" />
+        <!-- <input v-focus="{self:'self'}" type="text" placeholder="autoFocus" /> -->
       </div>
       <div class="shijiu">
         <p class="heiha">9.vuex一般怎么写，怎么用，模块化的使用；</p>vuex是什么：

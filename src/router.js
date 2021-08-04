@@ -86,9 +86,14 @@ export default new Router({
       component: () => import('./components/practice.vue')
     },
     {
-      path: '/echarsgr',
+      path: '/',
       name: 'echarsgr',
       component: () => import('./components/echarsgr.vue')
+    },
+    {
+      path: '/GluttonousSnake',
+      name: 'GluttonousSnake',
+      component: () => import('./components/GluttonousSnake.vue')
     },
   ]
 })

@@ -37,7 +37,7 @@ export default {
   
   data() {
     return {
-      nameList: ["html", "css", "js", "vue","practice","echarsgr"],
+      nameList: ["html", "css", "js", "vue","practice","echarsgr","GluttonousSnake"],
      // pathList: ["/css", "/js", "/route", "/vuex"],
      
       isbianse: true
